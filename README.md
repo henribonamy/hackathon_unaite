@@ -1,3 +1,11 @@
+<!-- 🏆 Project Achievement Banner -->
+<p align="center">
+  <b>🥈 This project won <a href="https://www.linkedin.com/posts/federation-unaite_unaite-is-thrilled-to-team-up-with-hugging-activity-7333807401827004417-BZRH?utm_source=share&utm_medium=member_desktop&rcm=ACoAADJ4pVQBSEvplam5K5-4LgmF-rqYOGWfI0U">2nd place at the Agents Hackathon</a> organised by</b><br>
+  <img src="res/sponsor_logos/huggingface_logo.png" alt="Hugging Face" height="40" style="vertical-align:middle; margin-right:10px;"/>
+  <img src="res/sponsor_logos/anthropic_logo.png" alt="Anthropic" height="40" style="vertical-align:middle; margin-right:10px;"/>
+  <img src="res/sponsor_logos/unaite_logo.jpg" alt="unaite" height="40" style="vertical-align:middle;"/>
+</p>
+
 <!-- Centered teaser image -->
 <p align="center">
   <img src="res/teaser_unait.png" alt="GitHunter Teaser" width="900"/>
