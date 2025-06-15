@@ -1,6 +1,7 @@
 .DS_Store
 .env
-__pycache__/
+.venv/
+**/__pycache__/
 venv
 .git
 __init__.py

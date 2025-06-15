@@ -6,4 +6,5 @@ class GitHubRepository(BaseModel):
     tldr: str
     url: str
     stars: int
-    last_update: str
+    forks: int
+
