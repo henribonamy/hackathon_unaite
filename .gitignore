@@ -5,3 +5,5 @@
 venv
 .git
 __init__.py
+.idea/
+

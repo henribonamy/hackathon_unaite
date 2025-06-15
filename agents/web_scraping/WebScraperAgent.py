@@ -21,7 +21,7 @@ class WebScraperAgent:
         """
         **Search phase**
        • Use `WebSearchTool` to query GitHub and the web for the most relevant repositories relevant to the prompt: `${user_prompt}`.
-       • For each result return the object → name, two-sentence TLDR, GitHub URL, Github stars, last updated date
+       • For each result return the object → name, two-sentence TLDR, GitHub URL, Github stars, last updated date.
         """
         prompt: str = user_query + " \n " + GET_REPOSITORIES_PROMPT
         agent: CodeAgent = CodeAgent(

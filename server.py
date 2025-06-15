@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request
 
+from agents.readme_parser.parser_agent import InstructionExtractorAgent
+
+from agents.install_repo.install_repo_agent import ProjectSetupAgent
+from agents.readme_parser import parser_agent
 from agents.web_scraping.utils.types import GitHubRepository
 from agents.web_scraping.WebScraperAgent import WebScraperAgent
 from manager import ResearchAssistant
@@ -38,6 +42,9 @@ EXAMPLE_PAPERS = {
 
 webScraperAgent = WebScraperAgent()
 
+projectSetupAgent = ProjectSetupAgent()
+
+parserAgent = InstructionExtractorAgent()
 
 @app.route("/")
 def home():
@@ -47,18 +54,23 @@ def home():
 @app.route("/install_env", methods=["POST"])
 def install_env():
     url = request.form.get("url")
+    print("hello")
     installation_steps = webScraperAgent.get_installation_steps(url)
-    # Install + UI
-    print(installation_steps)
+    installation_steps = parserAgent.extract_training_instructions(installation_steps)
+    projectSetupAgent.setup_project(
+        repo_url=url,
+        installation_instructions=installation_steps,
+        project_directory="./new_project",
+    )
     return "the result of install_env"
 
 
 @app.route("/get_papers", methods=["POST"])
 def process():
     prompt = request.form.get("prompt")
-    repositories : list[GitHubRepository] = webScraperAgent.get_repositories(prompt)
-    # return render_template("paper_list.html", papers=repositories)
+    repositories: list[GitHubRepository] = webScraperAgent.get_repositories(prompt)
     return render_template("paper_list.html", papers=repositories)
+    # return render_template("paper_list.html", papers=EXAMPLE_PAPERS["papers"])
 
 
 if __name__ == "__main__":
