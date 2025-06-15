@@ -65,3 +65,5 @@ This will list papers related to this topic.
 <p align="center">
   <img src="res/teaser_search.png" alt="Search Result Teaser" width="700"/>
 </p>
+
+After clicking on "install" for a paper, the codebase of the corresponding paper will be installed automatically.
