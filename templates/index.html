@@ -8,47 +8,173 @@
       integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
       crossorigin="anonymous"
     ></script>
-    <script src="/static/index.js"></script>
-    <title>Home Page</title>
+    <title>GitHunter</title>
+    <style>
+      body {
+        background: #10182a;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+      .stars {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
-  <body class="flex flex-col items-center mt-10">
-    <h1 class="text-3xl mb-4">The start of your research journey...</h1>
-
-    <form
-      method="POST"
-      action="get_papers"
-      class="flex items-center space-x-2 mt-5"
-      hx-post="/get_papers"
-      hx-target="#response"
-      hx-swap="innerHTML"
-    >
-      <textarea
-        name="prompt"
-        placeholder="Enter your research subject..."
-        class="border border-gray-400 rounded p-2 w-2xl h-xs resize-none"
-        rows="1"
-        cols="60"
-      ></textarea>
-
+  <body class="relative min-h-screen flex flex-col items-center justify-start">
+    <!-- Fond étoilé -->
+    <canvas class="stars" id="stars"></canvas>
+    <!-- Header -->
+    <header class="w-full flex items-center justify-between px-8 py-4 z-10">
+      <div class="flex items-center space-x-3">
+        <div class="bg-[#2d3a5a] rounded-lg p-2 flex items-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+            alt="logo"
+            class="w-8 h-8 mr-2"
+          />
+          <span class="text-xl font-bold text-[#7ee0ff]">GitHunter</span>
+        </div>
+        <span class="text-xs text-[#7ee0ff] ml-2">Hunt. Target. Deploy.</span>
+      </div>
+    </header>
+    <!-- Contenu principal -->
+    <main class="flex flex-col items-center flex-1 w-full z-10 mt-2">
       <button
-        type="submit"
-        class="w-24 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600"
-        title="Submit"
+        class="mb-6 px-6 py-2 rounded-full bg-gradient-to-r from-[#2d3a5a] to-[#7ee0ff] text-white font-semibold shadow-lg hover:scale-105 transition"
       >
-        Submit
+        Discover trusted github repositories
       </button>
-    </form>
+      <h1
+        class="text-5xl md:text-6xl font-extrabold text-center mb-4 bg-gradient-to-r from-white via-[#7ee0ff] to-purple-400 bg-clip-text text-transparent drop-shadow-lg"
+      >
+        Find AI Repos for <span class="text-[#7ee0ff]">Academic Research</span>
+      </h1>
+      <p class="text-lg text-gray-200 text-center mb-8 max-w-2xl">
+        Discover, compare, and install state-of-the-art AI repos backed by
+        peer-reviewed research papers
+      </p>
+      <form
+        class="flex items-center w-full max-w-2xl bg-[#1a2236] rounded-2xl px-4 py-2 shadow-lg mb-6"
+        method="POST"
+        action="get_papers"
+        hx-post="/get_papers"
+        hx-target="#response"
+        hx-swap="innerHTML"
+      >
+        <svg
+          class="w-6 h-6 text-[#7ee0ff] mr-2"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <input
+          id="search-input"
+          name="prompt"
+          placeholder="What kind of AI repos are you looking for?"
+          class="flex-1 bg-transparent outline-none text-white placeholder-gray-400 text-lg"
+        />
+        <button
+          type="submit"
+          class="ml-4 px-6 py-2 rounded-xl bg-gradient-to-r from-[#2d3a5a] to-[#7ee0ff] text-white font-semibold shadow hover:scale-105 transition"
+        >
+          Start Hunting
+        </button>
+      </form>
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          type="button"
+          class="popular-btn px-4 py-2 rounded-full bg-[#232b43] text-[#7ee0ff] font-medium hover:bg-[#2d3a5a] transition"
+        >
+          LLMs that summarize news
+        </button>
+        <button
+          type="button"
+          class="popular-btn px-4 py-2 rounded-full bg-[#232b43] text-[#7ee0ff] font-medium hover:bg-[#2d3a5a] transition"
+        >
+          Open-source research agents
+        </button>
+        <button
+          type="button"
+          class="popular-btn px-4 py-2 rounded-full bg-[#232b43] text-[#7ee0ff] font-medium hover:bg-[#2d3a5a] transition"
+        >
+          Computer vision models
+        </button>
+        <button
+          type="button"
+          class="popular-btn px-4 py-2 rounded-full bg-[#232b43] text-[#7ee0ff] font-medium hover:bg-[#2d3a5a] transition"
+        >
+          Natural language processing repos
+        </button>
+        <button
+          type="button"
+          class="popular-btn px-4 py-2 rounded-full bg-[#232b43] text-[#7ee0ff] font-medium hover:bg-[#2d3a5a] transition"
+        >
+          Reinforcement learning frameworks
+        </button>
+      </div>
+      <div id="response" class="w-full px-5"></div>
+    </main>
+    <script>
+      // Génère un fond étoilé simple
+      const canvas = document.getElementById("stars");
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        function drawStars() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < 200; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const r = Math.random() * 1.2 + 0.2;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = Math.random() * 0.7 + 0.3;
+            ctx.fill();
+          }
+          ctx.globalAlpha = 1;
+        }
+        resize();
+        drawStars();
+        window.addEventListener("resize", () => {
+          resize();
+          drawStars();
+        });
+      }
+      // Attach click event to all popular buttons
+      document.querySelectorAll(".popular-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document.getElementById("search-input").value =
+            this.textContent.trim();
+        });
+      });
 
-    <div id="response" class="mt-8 w-full max-w-2xl"></div>
-        <dialog id="dialog" class="bg-black text-green-400 font-mono p-4 rounded-lg shadow-lg border border-gray-700 w-3/4 h-3/4 max-w-4xl">
-            <div class="flex justify-between items-center mb-2">
-                <div class="flex space-x-2">
-                    <button autofocus class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-700" onclick="document.getElementById('dialog').close();"></button>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-            </div>
-            <div id="console" class="bg-black/50 p-2 rounded h-[calc(100%-2rem)] overflow-y-auto"></div>
-        </dialog>
+      // Run after HTMX swaps in new content
+      document.body.addEventListener("htmx:afterSwap", function (event) {
+        // Check if the updated element has ID 'response'
+        if (event.target.id === "response") {
+          setTimeout(() => {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "smooth",
+            });
+          }, 100);
+        }
+      });
+    </script>
   </body>
 </html>

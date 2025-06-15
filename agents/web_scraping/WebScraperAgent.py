@@ -27,13 +27,15 @@ class WebScraperAgent:
         agent: CodeAgent = CodeAgent(
             tools=[WebSearchTool()],
             model=self.model,
-            stream_outputs=True
+            stream_outputs=True,
+            name="get_repo_agent",
+            description="Queries the web to find the most relevant repositories relevant to the prompt."
         )
 
         response: str = agent.run(prompt)
-        print(response)
 
-        return parse_string_to_repositories(response)
+        return response
+        #return parse_string_to_repositories(response)
 
     def get_installation_steps(self, url: str) -> str:
         """
@@ -54,7 +56,9 @@ class WebScraperAgent:
         agent: CodeAgent = CodeAgent(
             tools=[],
             model=self.model,
-            stream_outputs=True
+            stream_outputs=True,
+            name="get_installation_steps",
+            description="From a github URL, generate installation steps."
         )
         print("Running Get Installation agent")
         response: str = agent.run(prompt)
