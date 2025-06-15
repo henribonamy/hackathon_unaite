@@ -53,13 +53,12 @@ class WebScraperAgent:
         agent: CodeAgent = CodeAgent(
             tools=[],
             model=self.model,
-            stream_outputs=True,
-            verbosity_level=LogLevel.DEBUG
+            stream_outputs=True
         )
         print("Running Get Installation agent")
         response: str = agent.run(prompt)
 
-        installation_steps = "### Infos on the repos: \n " + content + " \n\n ### Installation Steps:\n " + response
+        installation_steps = f"### Infos on the repos: \n {content} \n\n ### Installation Steps:\n {response}"
 
         return installation_steps
 
