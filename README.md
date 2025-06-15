@@ -1,6 +1,6 @@
 <!-- Centered teaser image -->
 <p align="center">
-  <img src="res/teaser_unait.png" alt="GitHunter Teaser" width="600"/>
+  <img src="res/teaser_unait.png" alt="GitHunter Teaser" width="900"/>
 </p>
 
 <h1 align="center">🚀 <span style="color:#4F8EF7">GitHunter</span>: Multi-Agent Research Assistant 🕵️‍♂️</h1>
@@ -73,7 +73,7 @@ This will list papers related to this topic.
 
 <!-- Centered search result teaser image -->
 <p align="center">
-  <img src="res/teaser_search.png" alt="Search Result Teaser" width="700"/>
+  <img src="res/teaser_search.png" alt="Search Result Teaser" width="900"/>
 </p>
 
 After clicking on <b>"install"</b> for a paper, the codebase of the corresponding paper will be installed automatically. ✨
@@ -81,6 +81,10 @@ After clicking on <b>"install"</b> for a paper, the codebase of the correspondin
 ---
 
 # 🧑‍💻 Technologies Used
+
+<p align="center">
+  <img src="res/diagram.png" alt="System Diagram" width="800"/>
+</p>
 
 This tool is developed using the <b>`smolagents`</b> package by Hugging Face 🤗, and leverages advanced language models including <b>Claude Sonnet 3.7</b> and <b>Swen 2.54</b> to provide intelligent search and automation capabilities.
 
