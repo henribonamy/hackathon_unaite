@@ -86,7 +86,7 @@ After clicking on <b>"install"</b> for a paper, the codebase of the correspondin
   <img src="res/diagram.png" alt="System Diagram" width="800"/>
 </p>
 
-This tool is developed using the <b>`smolagents`</b> package by Hugging Face 🤗, and leverages advanced language models including <b>Claude Sonnet 3.7</b> and <b>Swen 2.54</b> to provide intelligent search and automation capabilities.
+This tool is developed using the <b>`smolagents`</b> package by Hugging Face 🤗, and leverages advanced language models including <b>Claude Sonnet 3.7</b> and <b>Qwen 2.54</b> to provide intelligent search and automation capabilities.
 
 ---
 
