@@ -5,6 +5,7 @@ from agents.web_scraping.utils.constants import GET_REPOSITORIES_PROMPT, GET_INS
 from agents.web_scraping.utils.helpers import parse_string_to_repositories
 from agents.web_scraping.utils.types import GitHubRepository
 from gitingest import ingest
+from smolagents.monitoring import LogLevel
 
 load_dotenv()
 
@@ -44,7 +45,7 @@ class WebScraperAgent:
            • Produce a shell script (macOS/Linux, Python) with conda env setup, dependency installs, with all the commands to install and run the project.
         """
         print("Ingesting repository from URL:", url)
-        summary, tree, content = ingest(url)
+        summary, tree, content = ingest(url, include_patterns="README.md **/README.md INSTALL.md **/INSTALL.md")
         print("Ingestion complete. Tree and content received.")
 
         prompt = GET_INSTALLATION_STEPS_PROMPT.replace("{tree}", tree).replace("{content}", content)
@@ -52,10 +53,13 @@ class WebScraperAgent:
         agent: CodeAgent = CodeAgent(
             tools=[],
             model=self.model,
-            stream_outputs=True
+            stream_outputs=True,
+            verbosity_level=LogLevel.DEBUG
         )
         print("Running Get Installation agent")
         response: str = agent.run(prompt)
 
-        return response
+        installation_steps = "### Infos on the repos: \n " + content + " \n\n ### Installation Steps:\n " + response
+
+        return installation_steps
 
