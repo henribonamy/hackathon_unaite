@@ -11,12 +11,12 @@ for repo in repositories:
     print("\n\n")
     print(repo)
 
-# selected_repository = repositories[0]  # Assuming the user selects the first repository
-#
-# print("-------- Fetching specific repository installation guide --------")
-# installation_steps: str = webScraperAgent.get_installation_steps("https://github.com/HaozheZhao/UltraEdit")
-#
-# print(installation_steps)
+selected_repository = repositories[0]  # Assuming the user selects the first repository
+
+print("-------- Fetching specific repository installation guide --------")
+installation_steps: str = webScraperAgent.get_installation_steps("https://github.com/HaozheZhao/UltraEdit")
+
+print(installation_steps)
 
 
 
