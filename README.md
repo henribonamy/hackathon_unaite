@@ -25,6 +25,8 @@
 
 # 🛠️ Installation
 
+> **Note:** This tool is tested with <b>Python 3.10.18</b> 🐍. Compatibility with other versions is not guaranteed.
+
 1. <b>Clone the repository:</b> 🌀
    ```sh
    git clone https://github.com/henribonamy/hackathon_unaite.git
