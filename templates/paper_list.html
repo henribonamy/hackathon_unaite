@@ -1,0 +1,20 @@
+<ul class="space-y-4 w-full">
+  {% for paper in papers %}
+  <li class="p-4 bg-white shadow rounded-lg hover:shadow-md transition-shadow">
+    <div class="flex justify-between items-center">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800">{{ paper.title }}</h3>
+      <p class="text-sm text-gray-600 mt-1">{{ paper.authors }}</p>
+      <p class="text-sm text-gray-500 mt-2">{{ paper.abstract }}</p>
+      <a href="{{ paper.url }}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm mt-2 inline-block">
+      Lire le papier →
+      </a>
+    </div>
+    <div>
+      <form method="POST" action="install_env" hx-post="/install_env" hx-target="#console" hx-swap="innerHTML">
+                    <button type="submit" class="w-36 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600" title="Submit" onclick="document.getElementById('dialog').showModal()">Generate env</button>
+      </form>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

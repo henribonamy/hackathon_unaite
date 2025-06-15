@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://unpkg.com/htmx.org@2.0.4"
+      integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/static/index.js"></script>
+    <title>Home Page</title>
+  </head>
+  <body class="flex flex-col items-center mt-10">
+    <h1 class="text-3xl mb-4">The start of your research journey...</h1>
+
+    <form
+      method="POST"
+      action="get_papers"
+      class="flex items-center space-x-2 mt-5"
+      hx-post="/get_papers"
+      hx-target="#response"
+      hx-swap="innerHTML"
+    >
+      <textarea
+        name="prompt"
+        placeholder="Enter your research subject..."
+        class="border border-gray-400 rounded p-2 w-2xl h-xs resize-none"
+        rows="1"
+        cols="60"
+      ></textarea>
+
+      <button
+        type="submit"
+        class="w-24 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600"
+        title="Submit"
+      >
+        Submit
+      </button>
+    </form>
+
+    <div id="response" class="mt-8 w-full max-w-2xl"></div>
+        <dialog id="dialog" class="bg-black text-green-400 font-mono p-4 rounded-lg shadow-lg border border-gray-700 w-3/4 h-3/4 max-w-4xl">
+            <div class="flex justify-between items-center mb-2">
+                <div class="flex space-x-2">
+                    <button autofocus class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-700" onclick="document.getElementById('dialog').close();"></button>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+            </div>
+            <div id="console" class="bg-black/50 p-2 rounded h-[calc(100%-2rem)] overflow-y-auto"></div>
+        </dialog>
+  </body>
+</html>
