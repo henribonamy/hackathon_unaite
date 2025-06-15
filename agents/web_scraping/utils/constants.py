@@ -44,8 +44,7 @@ GET_INSTALLATION_STEPS_PROMPT = """
 You are **WebScrapperAgent**, an autonomous assistant that helps users fetch infos about Github projects.
 
 **Reasoning phase**
-   • From the tree & content provided of the github repository, infer the minimal steps to **install** and **run a demo** of the project
-   • Produce a shell script (macOS/Linux, Python) with conda env setup, dependency installs, with all the commands to install and run the project.
+   • From the tree & content provided of the github repository, return me what are the prerequisites to **install** and **run a demo** of the project, like python version, dependencies, etc.
 
 Infos of the github repository:
 tree: {tree}

@@ -13,7 +13,8 @@ class WebScraperAgent:
     def __init__(self):
         self.model = LiteLLMModel(
             model_id="anthropic/claude-3-7-sonnet-20250219",
-            api_key=os.environ["ANTHROPIC_API_KEY"]
+            api_key=os.environ["ANTHROPIC_API_KEY"],
+            temperature=0.1,
         )
 
     def get_repositories(self, user_query: str) -> list[GitHubRepository]:
@@ -58,7 +59,7 @@ class WebScraperAgent:
         print("Running Get Installation agent")
         response: str = agent.run(prompt)
 
-        installation_steps = f"### Infos on the repos: \n {content} \n\n ### Installation Steps:\n {response}"
+        installation_steps = f"### Infos on the repos: \n {content} \n\n ### Installation Prerequisites:\n {response}"
 
         return installation_steps
 
