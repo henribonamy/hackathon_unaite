@@ -1,19 +1,118 @@
-<ul class="space-y-4 w-full">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
   {% for paper in papers %}
-  <li class="p-4 bg-white shadow rounded-lg hover:shadow-md transition-shadow">
-    <div class="flex justify-between items-center">
-    <div>
-      <h3 class="text-lg font-semibold text-gray-800">{{ paper.title }}</h3>
-      <p class="text-sm text-gray-600 mt-1">{{ paper.authors }}</p>
-      <p class="text-sm text-gray-500 mt-2">{{ paper.abstract }}</p>
-      <a href="{{ paper.url }}" target="_blank" class="text-blue-500 hover:text-blue-700 text-sm mt-2 inline-block">
-      Lire le papier →
-      </a>
-    </div>
-    <div>
-      <form method="POST" action="install_env" hx-post="/install_env" hx-target="#console" hx-swap="innerHTML">
-                    <button type="submit" class="w-36 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600" title="Submit" onclick="document.getElementById('dialog').showModal()">Generate env</button>
-      </form>
+  <li class="h-full">
+    <div
+      class="bg-white/90 border border-[#e0f4ff] rounded-2xl shadow-lg p-6 h-full flex flex-col"
+    >
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div
+            class="bg-[#e0f4ff] rounded-full p-3 flex items-center justify-center"
+          >
+            <svg width="32" height="32" fill="none" viewBox="0 0 24 24">
+              <rect width="24" height="24" rx="12" fill="#e0f4ff" />
+              <text
+                x="8"
+                y="17"
+                font-size="16"
+                fill="#7ee0ff"
+                text-anchor="middle"
+              >
+                ❝
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div class="flex-1">
+          <div class="flex flex-wrap items-center gap-3 mb-2">
+            <h2 class="text-2xl font-bold text-[#2386c7]">{{ paper.name }}</h2>
+            <span
+              class="bg-[#fff7e0] text-[#e6a100] px-3 py-1 rounded-lg text-sm font-semibold flex items-center gap-1 border-2 border-[#e6a100]"
+              ><svg
+                class="w-4 h-4 inline"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+                <path d="M14 2v6h6" />
+                <path d="M16 13H8" />
+                <path d="M16 17H8" />
+                <path d="M10 9H8" /></svg
+              >{{ paper.stars }} citations</span
+            >
+          </div>
+          <p class="text-gray-700 mb-2">{{ paper.tldr }}</p>
+          <a href="#" class="text-[#2386c7] hover:underline text-sm font-medium"
+            >Read full abstract</a
+          >
+        </div>
+      </div>
+      <div class="border-t my-4"></div>
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 px-2"
+      >
+        <div class="flex items-center gap-2">
+          <svg
+            class="w-6 h-6 text-gray-700"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 0C5.371 0 0 5.371 0 12c0 5.303 3.438 9.8 8.205 11.385.6.111.82-.261.82-.577 0-.285-.011-1.04-.017-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.606-2.665-.304-5.466-1.332-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.984-.399 3.003-.404 1.018.005 2.046.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.625-5.475 5.921.43.372.823 1.104.823 2.225 0 1.606-.015 2.898-.015 3.293 0 .319.216.694.825.576C20.565 21.796 24 17.299 24 12c0-6.629-5.371-12-12-12z"
+            />
+          </svg>
+          <a
+            href="{{ paper.url }}"
+            target="_blank"
+            class="font-semibold text-gray-800 hover:underline"
+            >Visit GitHub Repo</a
+          >
+        </div>
+        <form
+          method="POST"
+          action="install_env"
+          hx-post="/install_env"
+          hx-target="#console"
+          hx-swap="innerHTML"
+        >
+          <input type="hidden" name="url" value="{{ paper.url }}" />
+          <button
+            type="submit"
+            class="bg-[#2386c7] hover:bg-[#1b5e8c] text-white font-semibold px-6 py-2 rounded-xl flex items-center gap-2 shadow"
+            onclick="document.getElementById('dialog').showModal()"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 4v16m8-8H4" />
+            </svg>
+            Install
+          </button>
+        </form>
+      </div>
+      <div class="flex gap-3 mt-6 justify-center">
+        <div
+          class="bg-[#f6fafd] rounded-xl p-3 flex flex-col items-center w-24 border-2 border-black"
+        >
+          <span class="font-bold text-lg">{{ paper.stars }}</span>
+          <span class="text-xs text-gray-500">Stars</span>
+        </div>
+        <div
+          class="bg-[#f6fafd] rounded-xl p-3 flex flex-col items-center w-24 border-2 border-black"
+        >
+          <span class="font-bold text-lg">{{ paper.forks }}</span>
+          <span class="text-xs text-gray-500">Forks</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-5"></div>
     </div>
   </li>
   {% endfor %}

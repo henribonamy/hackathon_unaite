@@ -1,22 +1,19 @@
 from smolagents import (CodeAgent, InferenceClientModel, LiteLLMModel,
                         ToolCallingAgent, WebSearchTool)
 
-model = LiteLLMModel(model_id="anthropic/claude-sonnet-4-0")
-
-# web_agent = ToolCallingAgent(
-#    tools=[WebSearchTool(), visit_webpage],
-#    model=model,
-#    max_steps=10,
-#    name="web_search_agent",
-#    description="Runs web searches for you.",
-# )
+from agents.web_scraping.WebScraperAgent import WebScraperAgent
 
 
 class ResearchAssistant(CodeAgent):
 
     def __init__(self):
+        manager = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+        webScraperAgent = WebScraperAgent()
         super().__init__(
-            tools=[], model=model, managed_agents=[], additional_authorized_imports=[]
+            tools=[],
+            model=manager,
+            managed_agents=[webScraperAgent],
+            additional_authorized_imports=[],
         )
 
     def use(self, prompt):

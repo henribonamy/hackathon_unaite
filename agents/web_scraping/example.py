@@ -20,5 +20,4 @@ installation_steps: str = webScraperAgent.get_installation_steps(
     "https://github.com/HaozheZhao/UltraEdit"
 )
 
-print("-------- Installation Steps --------")
 print(installation_steps)
