@@ -5,7 +5,7 @@
 
 # GitHunter: Multi-Agent Research Assistant
 
-GitHunter is an intelligent platform for discovering and installing AI repositories based on academic research. The application allows users to easily find, compare, and install reliable AI repositories backed by peer-reviewed research papers.
+GitHunter is an intelligent platform for discovering and installing AI repositories based on academic research. The application allows users to easily find, compare, and install reliable AI repositories backed by peer-reviewed research papers. This tool enables researchers and engineers to focus on expanding and testing codebases from papers by saving time on their installation.
 
 ## Features
 
