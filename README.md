@@ -66,11 +66,6 @@ If you prefer using pip, follow these steps:
    ```sh
    pip install -e .
    ```
-   
-   Or if you prefer to install from requirements:
-   ```sh
-   pip install -r requirements.txt  # If requirements.txt exists
-   ```
 
 ## Configuration
 
@@ -79,6 +74,8 @@ In the project root, create a file named `.env` and add your Anthropic API key:
 ```env
 ANTHROPIC_API_KEY=your_anthropic_api_key_here
 ```
+
+> You can generate an Anthropic API key from the [Anthropic Console](https://console.anthropic.com/)
 
 ---
 
@@ -93,7 +90,7 @@ If you installed with UV, run the project with:
 source .venv/bin/activate
 
 # Start the server
-python server.py
+uv run server.py
 ```
 
 ## With pip
