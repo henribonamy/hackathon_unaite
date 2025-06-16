@@ -33,7 +33,7 @@
 
 # 🛠️ Installation
 
-> **Note:** This tool is tested with <b>Python 3.10.18</b> 🐍. Compatibility with other versions is not guaranteed.
+> [!NOTE] GitHunter is tested with <b>Python  $\geq$ 3.10</b> 🐍.
 
 1. <b>Clone the repository:</b> 🌀
    ```sh
@@ -45,11 +45,10 @@
 
 [uv](https://astral.sh/uv) is the recommended package installer and virtual environment manager for this project, offering faster installation and dependency resolution.
 
-**Create a virtual environment and install dependencies:** 📦
+**Install dependencies and activate the environment:** 📦
    ```sh
-   uv venv
-   source .venv/bin/activate
    uv sync
+   source .venv/bin/activate
    ```
 
 ## Using pip
@@ -58,7 +57,7 @@ If you prefer using pip, follow these steps:
 
 1. <b>(Optional) Create and activate a virtual environment:</b> 🐍
    ```sh
-   python3 -m venv venv
+   python -m venv venv
    source venv/bin/activate
    ```
 
@@ -110,6 +109,14 @@ After running the command, open the link shown in your terminal (usually `http:/
 ---
 
 # 🎬 Demo
+
+Watch our video demonstration to see GitHunter in action:
+
+<p align="center">
+  <a href="https://youtu.be/cB2Nse_rjmo?si=Yz4eFtgfesr8YPRt" target="_blank">
+    <img src="https://img.youtube.com/vi/cB2Nse_rjmo/maxresdefault.jpg" alt="GitHunter Demo Video" width="600" />
+  </a>
+</p>
 
 To see the search functionality in action, try entering the following prompt in the search bar:
 
