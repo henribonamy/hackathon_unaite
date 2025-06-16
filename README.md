@@ -41,29 +41,75 @@
    cd unaite_def
    ```
 
-2. <b>(Optional) Create and activate a virtual environment:</b> 🐍
+## Using Astral UV (Recommended)
+
+[Astral UV](https://astral.sh/uv) is the recommended package installer and virtual environment manager for this project, offering faster installation and dependency resolution.
+
+1. <b>Install Astral UV:</b> 🚀
+   ```sh
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+2. <b>Create a virtual environment and install dependencies:</b> 📦
+   ```sh
+   uv venv
+   source .venv/bin/activate
+   uv sync
+   ```
+
+## Using pip
+
+If you prefer using pip, follow these steps:
+
+1. <b>(Optional) Create and activate a virtual environment:</b> 🐍
    ```sh
    python3 -m venv venv
    source venv/bin/activate
    ```
 
-3. <b>Install dependencies:</b> 📦
+2. <b>Install dependencies:</b> 📦
    ```sh
-   pip install -r requirements.txt
+   pip install -e .
+   ```
+   
+   Or if you prefer to install from requirements:
+   ```sh
+   pip install -r requirements.txt  # If requirements.txt exists
    ```
 
-4. <b>Create a <code>.env</code> file:</b> 🔑
-   In the project root, create a file named `.env` and add your Anthropic API key:
-   ```env
-   ANTHROPIC_API_KEY=your_anthropic_api_key_here
-   ```
+## Configuration
+
+<b>Create a <code>.env</code> file:</b> 🔑
+In the project root, create a file named `.env` and add your Anthropic API key:
+```env
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+```
 
 ---
 
 # ▶️ Running the Project
 
-Start the server with:
+## With UV (Recommended)
+
+If you installed with UV, run the project with:
+
 ```sh
+# Make sure your virtual environment is activated
+source .venv/bin/activate
+
+# Start the server
+python server.py
+```
+
+## With pip
+
+If you installed with pip, run the project with:
+
+```sh
+# Make sure your virtual environment is activated (if you created one)
+source venv/bin/activate  # Skip if not using a virtual environment
+
+# Start the server
 python server.py
 ```
 

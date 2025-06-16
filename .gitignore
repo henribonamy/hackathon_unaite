@@ -1,9 +1,54 @@
+# OS specific files
 .DS_Store
+Thumbs.db
+desktop.ini
+
+# Python environments
 .env
 .venv/
-**/__pycache__/
-venv
-.git
-__init__.py
-.idea/
+venv/
+ENV/
+env/
 
+# Python cache files
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Git
+.git/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Virtual environment configuration
+.python-version
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Local data and logs
+*.log
+logs/
+data/
+
+# Don't ignore actual __init__.py files, they're needed for module structure
+# __init__.py  # This line is removed as it should not be ignored

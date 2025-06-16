@@ -1,0 +1,12 @@
+[project]
+name = "git-hunter"
+version = "0.1.0"
+description = "Discover, compare, and install AI research repositories with ease"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.1.1",
+    "gitingest>=0.1.4",
+    "litellm>=1.72.6",
+    "smolagents>=1.18.0",
+]
