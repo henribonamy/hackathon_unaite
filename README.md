@@ -41,16 +41,11 @@
    cd unaite_def
    ```
 
-## Using Astral UV (Recommended)
+## Using uv (Recommended)
 
-[Astral UV](https://astral.sh/uv) is the recommended package installer and virtual environment manager for this project, offering faster installation and dependency resolution.
+[uv](https://astral.sh/uv) is the recommended package installer and virtual environment manager for this project, offering faster installation and dependency resolution.
 
-1. <b>Install Astral UV:</b> 🚀
-   ```sh
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   ```
-
-2. <b>Create a virtual environment and install dependencies:</b> 📦
+**Create a virtual environment and install dependencies:** 📦
    ```sh
    uv venv
    source .venv/bin/activate
