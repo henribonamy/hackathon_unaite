@@ -1,15 +1,24 @@
-from flask import Flask, render_template, request
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from agents.readme_parser.parser_agent import InstructionExtractorAgent
-
 from agents.install_repo.install_repo_agent import ProjectSetupAgent
-from agents.readme_parser import parser_agent
 from agents.web_scraping.utils.types import GitHubRepository
 from agents.web_scraping.WebScraperAgent import WebScraperAgent
-from manager import ResearchAssistant
 
-app = Flask(__name__)
+import uvicorn
+import os
 
+app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
+
+
+webScraperAgent = WebScraperAgent()
+projectSetupAgent = ProjectSetupAgent()
+parserAgent = InstructionExtractorAgent()
 
 EXAMPLE_PAPERS = {
     "papers": [
@@ -40,20 +49,12 @@ EXAMPLE_PAPERS = {
     ]
 }
 
-webScraperAgent = WebScraperAgent()
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-projectSetupAgent = ProjectSetupAgent()
-
-parserAgent = InstructionExtractorAgent()
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-
-@app.route("/install_env", methods=["POST"])
-def install_env():
-    url = request.form.get("url")
+@app.post("/install_env", response_class=HTMLResponse)
+async def install_env(request: Request, url: str = Form(...)):
     print("hello")
     installation_steps = webScraperAgent.get_installation_steps(url)
     installation_steps = parserAgent.extract_training_instructions(installation_steps)
@@ -62,16 +63,15 @@ def install_env():
         installation_instructions=installation_steps,
         project_directory="./new_project",
     )
-    return "the result of install_env"
+    return HTMLResponse("the result of install_env")
 
-
-@app.route("/get_papers", methods=["POST"])
-def process():
-    prompt = request.form.get("prompt")
-    repositories: list[GitHubRepository] = webScraperAgent.get_repositories(prompt)
-    return render_template("paper_list.html", papers=repositories)
-    # return render_template("paper_list.html", papers=EXAMPLE_PAPERS["papers"])
-
+@app.post("/get_papers", response_class=HTMLResponse)
+async def get_papers(request: Request, prompt: str = Form(...)):
+    repositories = webScraperAgent.get_repositories(prompt)
+    # If repositories is not a list of dicts, convert as needed
+    return templates.TemplateResponse("paper_list.html", {"request": request, "papers": repositories})
+    # To use example papers instead, uncomment:
+    # return templates.TemplateResponse("paper_list.html", {"request": request, "papers": EXAMPLE_PAPERS["papers"]})
 
 if __name__ == "__main__":
-    app.run(port=1414, debug=True)
+    uvicorn.run("server:app", host="0.0.0.0", port=1414, reload=True)
